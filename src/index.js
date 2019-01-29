@@ -53,11 +53,11 @@ const renderGame = (shuffledArray, domNode = document.getElementById('app')) => 
 };
 
 function gameStart () {
-    const stateOfGame = shuffleState(fifteen);
-    renderGame(stateOfGame);
+    const currentPosition = shuffleState(fifteen);
+    renderGame(currentPosition);
 
     document.addEventListener('keydown', e => {
-        const xyOfEmptyCell = getXY(stateOfGame);
+        const xyOfEmptyCell = getXY(currentPosition);
 
 
         if (e.keyCode === 37) {
@@ -65,9 +65,9 @@ function gameStart () {
             if (xyOfEmptyCell.x === 3) return;
             const nextY = xyOfEmptyCell.y;
             const nextX = xyOfEmptyCell.x + 1;
-            stateOfGame[xyOfEmptyCell.y][xyOfEmptyCell.x] = stateOfGame[nextY][nextX];
-            stateOfGame[nextY][nextX] = null;
-            renderGame(stateOfGame);
+            currentPosition[xyOfEmptyCell.y][xyOfEmptyCell.x] = currentPosition[nextY][nextX];
+            currentPosition[nextY][nextX] = null;
+            renderGame(currentPosition);
         }
 
 
@@ -76,9 +76,9 @@ function gameStart () {
             if (xyOfEmptyCell.y === 3) return;
             const nextY = xyOfEmptyCell.y + 1;
             const nextX = xyOfEmptyCell.x;
-            stateOfGame[xyOfEmptyCell.y][xyOfEmptyCell.x] = stateOfGame[nextY][nextX];
-            stateOfGame[nextY][nextX] = null;
-            renderGame(stateOfGame);
+            currentPosition[xyOfEmptyCell.y][xyOfEmptyCell.x] = currentPosition[nextY][nextX];
+            currentPosition[nextY][nextX] = null;
+            renderGame(currentPosition);
         }
 
 
@@ -88,9 +88,9 @@ function gameStart () {
             if (xyOfEmptyCell.x === 0) return;
             const nextY = xyOfEmptyCell.y;
             const nextX = xyOfEmptyCell.x - 1;
-            stateOfGame[xyOfEmptyCell.y][xyOfEmptyCell.x] = stateOfGame[nextY][nextX];
-            stateOfGame[nextY][nextX] = null;
-            renderGame(stateOfGame);
+            currentPosition[xyOfEmptyCell.y][xyOfEmptyCell.x] = currentPosition[nextY][nextX];
+            currentPosition[nextY][nextX] = null;
+            renderGame(currentPosition);
         }
 
 
@@ -99,18 +99,18 @@ function gameStart () {
             if (xyOfEmptyCell.y === 0) return;
             const nextY = xyOfEmptyCell.y - 1;
             const nextX = xyOfEmptyCell.x;
-            stateOfGame[xyOfEmptyCell.y][xyOfEmptyCell.x] = stateOfGame[nextY][nextX];
-            stateOfGame[nextY][nextX] = null;
-            renderGame(stateOfGame);
+            currentPosition[xyOfEmptyCell.y][xyOfEmptyCell.x] = currentPosition[nextY][nextX];
+            currentPosition[nextY][nextX] = null;
+            renderGame(currentPosition);
         }
 
     });
 
 
-    if (JSON.stringify(stateOfGame) === JSON.stringify(fifteen)) {
+    if (JSON.stringify(currentPosition) === JSON.stringify(fifteen)) {
         setTimeout(() => {
             alert('You are a Winner!');
-            gameStart();
+
         }, );
     }
 }
